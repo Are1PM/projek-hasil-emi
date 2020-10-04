@@ -293,6 +293,20 @@ class Pengajuanldp
         $prepare = $this->konek->execute()->prepare($sql);
         $proses = $prepare->execute();
     }
+    
+    public function queryCount()
+    {
+        $query = "SELECT SUM(IF(id_status = 1, 1,0)) AS setuju, SUM(IF(id_status = 2, 1,0)) AS tolak FROM pengajuan_ldp";
+        $ldp = $this->konek->execute()->query($query)->fetchAll(PDO::FETCH_OBJ);
+        
+        $query = "SELECT SUM(IF(id_status = 1, 1,0)) AS setuju, SUM(IF(id_status = 2, 1,0)) AS tolak FROM pengajuan_kupon_bbm";
+        $bbm = $this->konek->execute()->query($query)->fetchAll(PDO::FETCH_OBJ);
+        
+        $query = "SELECT SUM(IF(id_status = 1, 1,0)) AS setuju, SUM(IF(id_status = 2, 1,0)) AS tolak FROM pengajuan_servis";
+        $service = $this->konek->execute()->query($query)->fetchAll(PDO::FETCH_OBJ);
+        // print_r($proses);die;
+        return [$ldp, $bbm, $service];
+    }
 
     function __destruct()
     {

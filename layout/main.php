@@ -242,6 +242,7 @@
 				$data->MenghapusUnitsla();
 				$this->main->tampilUnitsla();
             }else{
+				$this->main->tampilkanInfo();
             	require_once "template/home.php";
             }
         }

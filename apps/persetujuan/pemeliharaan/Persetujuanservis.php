@@ -181,6 +181,11 @@ class Persetujuanservis
         
         return $query;
     }
+     
+     public function getPengajuanSetuju(Type $var = null)
+     {
+         # code...
+     }
 
     function __destruct()
     {

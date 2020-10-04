@@ -84,7 +84,7 @@
           $id_spbu=$_POST['id_spbu'];
           $id_kendaraan=$_POST['id_kendaraan'];
           
-          $proses = new MengelolaPengajuanbbm('',$tanggal_pengajuan,$tanggal_pengisian,$id_jarak_tempuh,$id_jenis_bbm,$id_driver,$id_spbu,$id_kendaraan,'');
+          $proses = new MengelolaPengajuanbbm('',$tanggal_pengajuan,$tanggal_pengisian,$id_jarak_tempuh,$id_jenis_bbm,$id_driver,$id_spbu,$id_kendaraan,0);
           $input = $proses->MemasukkanPengajuanbbm();
 
       }

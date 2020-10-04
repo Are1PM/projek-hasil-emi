@@ -17,7 +17,7 @@
         <th>Driver</th>
         <th>SPBU</th>
         <th>Kendaraan</th>
-        <th>status</th>
+        <th>id_status</th>
         <th width="13%">Opsi</th>
       </tr>
       </thead>
@@ -35,9 +35,9 @@
           <td><?= $data->jenis_kendaraan ?></td>
           <td>
           <?php 
-          if ($data->status == "4") {
+          if ($data->id_status == 0) {
             echo "<span class='badge badge-warning'>Belum Dikirim</span>";
-          }elseif ($data->status == "0"){
+          }elseif ($data->id_status == 4){
             echo "<span class='badge badge-success'>Menunggu verifikasi admin</span>";
           }  ?>
          
@@ -45,20 +45,17 @@
           <?php
             if ($_SESSION['hak_akses']!="unit_sla") { ?>
              <?php
-                if ($data->status=="4") { ?>
+                if ($data->id_status==0) { ?>
                    <a href="?emi=ubah-pengajuanbbm&id_pengajuan_kupon_bbm=<?= $data->id_pengajuan_kupon_bbm; ?>&parameter=1" class="btn btn-sm btn-warning"><i class="fa fa-pen"></i> Edit</a> |
             <?php } ?>
             <?php
-                if ($data->status=="4") { ?>
+                if ($data->id_status==0) { ?>
                    <a href="?emi=hapus-pengajuanbbm&id_pengajuan_kupon_bbm=<?= $data->id_pengajuan_kupon_bbm ?>" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Hapus</a> |
             <?php } ?>
 
-            <?php
-                if ($data->status==0) { ?>
+            <?php } ?>
+            
               <a href="?emi=detail-pengajuanbbm&id_pengajuan_kupon_bbm=<?= $data->id_pengajuan_kupon_bbm; ?>&parameter=1" class="btn btn-sm btn-info"><i class="fa fa-eye"></i> Detail</a>
-            <?php } ?>
-
-            <?php } ?>
 
             <?php
             if ($_SESSION['hak_akses']!="driver") { ?>  |
@@ -67,8 +64,7 @@
             <?php
             if ($_SESSION['hak_akses']=="driver") { ?>
             <?php
-              if ($data->status=="4") { ?>
-
+              if ($data->id_status==0) { ?>
              |
             <a href="apps/pengajuan/kupon-bbm/proses-kirim-data.php?id_pengajuan_bbm=<?= $data->id_pengajuan_kupon_bbm; ?>" class="btn btn-sm btn-primary">Kirim</a>
             <?php } } }?> 

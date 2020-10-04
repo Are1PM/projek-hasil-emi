@@ -3,7 +3,7 @@ require "Pengajuanbbm.php";
 
 class MengelolaPengajuanbbm extends Pengajuanbbm
 {
-	public function __construct($id_pengajuan_kupon_bbm ='',$tanggal_pengajuan ='',$tanggal_pengisian ='',$id_jarak_tempuh ='',$id_jenis_bbm='',$id_driver='',$id_spbu='',$id_kendaraan='',$id_status='',$keterangan='')
+	public function __construct($id_pengajuan_kupon_bbm ='',$tanggal_pengajuan ='',$tanggal_pengisian ='',$id_jarak_tempuh ='',$id_jenis_bbm='',$id_driver='',$id_spbu='',$id_kendaraan='',$id_status=0,$keterangan='')
     {   
             $this->konek = new KoneksiBasisData();
 

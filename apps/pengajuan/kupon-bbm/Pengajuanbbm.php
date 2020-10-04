@@ -119,7 +119,7 @@ class Pengajuanbbm
         $id_spbu    =$this->getIdspbu();
         $id_kendaraan    =$this->getIdkendaraan();
 
-        $sql = "INSERT into pengajuan_kupon_bbm values (NULL,'$tanggal_pengajuan','$tanggal_pengisian','$id_jarak_tempuh','$id_jenis_bbm','$id_driver','$id_spbu','$id_kendaraan','4','')";
+        $sql = "INSERT into pengajuan_kupon_bbm values (NULL,'$tanggal_pengajuan','$tanggal_pengisian','$id_jarak_tempuh','$id_jenis_bbm','$id_driver','$id_spbu','$id_kendaraan','0','')";
         $prepare = $this->konek->execute()->prepare($sql);
         $proses = $prepare->execute();
 
@@ -227,7 +227,7 @@ class Pengajuanbbm
      }
      public function queryMelihatPengajuanbbm()
      {
-        $id_driver = $_SESSION['id_driver'];
+        $id_driver = isset($_SESSION['id_driver'])?$_SESSION['id_driver']:"";
         if ($_SESSION['hak_akses']=="unit_sla"){
             $sql= "SELECT * FROM pengajuan_kupon_bbm p,spbu s, kendaraan k, driver d, jarak_tempuh j, jenis_bbm b where s.id_spbu=p.id_spbu AND k.id_kendaraan=p.id_kendaraan AND d.id_driver=p.id_driver AND j.id_jarak_tempuh=p.id_jarak_tempuh AND b.id_jenis_bbm=p.id_jenis_bbm AND p.id_status NOT IN ('1','2')";
         }else{

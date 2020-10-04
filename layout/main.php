@@ -2,7 +2,7 @@
 	<div class="container-fluid">
 		<div id="page-wrapper">
 	<?php
-	require "interface/AntarMuka.php";
+	require "interface/antarmuka.php";
 
 	/**
 	 * 
@@ -18,7 +18,7 @@
 
 		public function main()
 		{
-			$parameter = $_GET['parameter'];
+			$parameter = isset($_GET['parameter'])?$_GET['parameter']:"";
 
 			if ($_GET['emi']=="data-driver") {
 				$this->main->tampilDriver();
@@ -42,7 +42,7 @@
 			}elseif ($_GET['emi']=="ubah-pegawai") {
 				$this->main->formPegawai($parameter);
 			}elseif ($_GET['emi']=="hapus-pegawai") {
-				$nip=$_GET['nip'];
+				$nip=isset($_GET['nip'])?$_GET['nip']:"";
 				$data = new MengelolaPegawai($nip);
 				$data->MenghapusPegawai();
 				$this->main->tampilPegawai();

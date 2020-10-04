@@ -3,7 +3,7 @@ require "Pengajuanservis.php";
 
 class MengelolaPengajuanservis extends Pengajuanservis
 {
-	public function __construct($id_pengajuan_servis ='',$tanggal_usulan ='',$tanggal_perbaikan ='',$uraian_laporan ='',$jangka_waktu='',$id_driver='',$id_tempat_servis='',$id_kendaraan='',$status='',$keterangan='')
+	public function __construct($id_pengajuan_servis ='',$tanggal_usulan ='',$tanggal_perbaikan ='',$uraian_laporan ='',$jangka_waktu='',$id_driver='',$id_tempat_servis='',$id_kendaraan='',$id_status='',$keterangan='')
     {   
             $this->konek = new KoneksiBasisData();
 
@@ -15,7 +15,7 @@ class MengelolaPengajuanservis extends Pengajuanservis
             $this->id_driver  = $id_driver;
             $this->id_tempat_servis = $id_tempat_servis;
             $this->id_kendaraan = $id_kendaraan;
-            $this->status = $status;
+            $this->id_status = $id_status;
             $this->keterangan = $keterangan;
     }
 

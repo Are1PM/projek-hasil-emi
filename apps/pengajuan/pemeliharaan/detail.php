@@ -36,7 +36,7 @@
         </tr>
         <tr>
           <td>Status</td>
-          <td><?= $data->status ?></td>
+          <td><?= $data->id_status ?></td>
         </tr>
         <tr>
         <td>Keterangan</td>

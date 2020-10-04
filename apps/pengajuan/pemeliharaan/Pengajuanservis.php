@@ -10,7 +10,7 @@ class Pengajuanservis
            $id_driver,
            $id_tempat_servis,
            $id_kendaraan,
-           $status,
+           $id_status,
            $keterangan;
 
     function getIdpengajuanservis()
@@ -46,9 +46,9 @@ class Pengajuanservis
     {
         return $this->id_kendaraan;
     }
-    function getStatus()
+    function getIdStatus()
     {
-        return $this->status;
+        return $this->id_status;
     }
     function getKeterangan()
     {
@@ -97,9 +97,9 @@ class Pengajuanservis
         $this->id_kendaraan = $id_kendaraan;
     }
 
-    function setStatus($status)
+    function setIdStatus($id_status)
     {
-        $this->status = $status;
+        $this->id_status = $id_status;
     }
 
     function setKeterangan($keterangan)
@@ -121,7 +121,7 @@ class Pengajuanservis
         $id_kendaraan    =$this->getIdkendaraan();
         $keterangan   =$this->getKeterangan();
 
-        $sql = "INSERT into pengajuan_servis values (NULL,'$tanggal_usulan','$tanggal_perbaikan','$uraian_laporan','$jangka_waktu','$id_driver','$id_tempat_servis','$id_kendaraan','4','')";
+        $sql = "INSERT into pengajuan_servis values (NULL,'$tanggal_usulan','$tanggal_perbaikan','$uraian_laporan','$jangka_waktu','$id_driver','$id_tempat_servis','$id_kendaraan',0,'')";
         $prepare = $this->konek->execute()->prepare($sql);
         $proses = $prepare->execute();
 
@@ -162,11 +162,11 @@ class Pengajuanservis
         $id_driver      = $this->getIddriver();
         $id_tempat_servis      = $this->getIdtempatservis();
         $id_kendaraan      = $this->getIdkendaraan();
-        $status      = $this->getStatus();
+        $id_status      = $this->getIdStatus();
         $keterangan    = $this->getKeterangan();
         
 
-        $sql = "UPDATE pengajuan_servis SET tanggal_usulan='$tanggal_usulan',tanggal_perbaikan='$tanggal_perbaikan',uraian_laporan='$uraian_laporan',jangka_waktu='$jangka_waktu',id_driver='$id_driver',id_tempat_servis='$id_tempat_servis',id_kendaraan='$id_kendaraan',status='$status',keterangan='$keterangan' where id_pengajuan_servis='$id_pengajuan_servis'";
+        $sql = "UPDATE pengajuan_servis SET tanggal_usulan='$tanggal_usulan',tanggal_perbaikan='$tanggal_perbaikan',uraian_laporan='$uraian_laporan',jangka_waktu='$jangka_waktu',id_driver='$id_driver',id_tempat_servis='$id_tempat_servis',id_kendaraan='$id_kendaraan',id_status='$id_status',keterangan='$keterangan' where id_pengajuan_servis='$id_pengajuan_servis'";
         $prepare = $this->konek->execute()->prepare($sql);
         $proses = $prepare->execute();
 
@@ -221,12 +221,12 @@ class Pengajuanservis
      }
      public function queryMelihatPengajuanservis()
      {
-        $id_driver = $_SESSION['id_driver'];
+        $id_driver = isset($_SESSION['id_driver'])?$_SESSION['id_driver']:"";
         if ($_SESSION['hak_akses']=="unit_sla"){
-        $sql= "SELECT * FROM pengajuan_servis inner join driver, tempat_servis, kendaraan where  pengajuan_servis.id_tempat_servis=tempat_servis.id_tempat_servis AND pengajuan_servis.id_kendaraan=kendaraan.id_kendaraan AND driver.id_driver=pengajuan_servis.id_driver AND pengajuan_servis.status NOT IN ('1','2','4')";
-    }else{
-        $sql= "SELECT * FROM pengajuan_servis inner join driver, tempat_servis, kendaraan where pengajuan_servis.id_driver='$id_driver' AND tempat_servis.id_tempat_servis=pengajuan_servis.id_tempat_servis AND kendaraan.id_kendaraan=pengajuan_servis.id_kendaraan AND driver.id_driver=pengajuan_servis.id_driver AND pengajuan_servis.status NOT IN ('1','2')";
-    }
+        $sql= "SELECT * FROM pengajuan_servis inner join driver, tempat_servis, kendaraan where  pengajuan_servis.id_tempat_servis=tempat_servis.id_tempat_servis AND pengajuan_servis.id_kendaraan=kendaraan.id_kendaraan AND driver.id_driver=pengajuan_servis.id_driver AND pengajuan_servis.id_status NOT IN ('1','2','0')";
+        }else{
+        $sql= "SELECT * FROM pengajuan_servis inner join driver, tempat_servis, kendaraan where pengajuan_servis.id_driver='$id_driver' AND tempat_servis.id_tempat_servis=pengajuan_servis.id_tempat_servis AND kendaraan.id_kendaraan=pengajuan_servis.id_kendaraan AND driver.id_driver=pengajuan_servis.id_driver AND pengajuan_servis.id_status NOT IN ('1','2')";
+        }
        
     $query = $this->konek->execute()->query($sql)->fetchAll(PDO::FETCH_OBJ);
     return $query;
@@ -235,10 +235,10 @@ class Pengajuanservis
     public function queryKonfirmasi()
     {
         $id_pengajuan_servis =$this->getIdpengajuanservis();
-        $status = $this->getStatus();
+        $id_status = $this->getIdStatus();
         $keterangan = $this->getKeterangan();
 
-        $sql = "UPDATE pengajuan_servis SET status='$status',keterangan='$keterangan' where id_pengajuan_servis='$id_pengajuan_servis'";
+        $sql = "UPDATE pengajuan_servis SET id_status='$id_status',keterangan='$keterangan' where id_pengajuan_servis='$id_pengajuan_servis'";
         $prepare = $this->konek->execute()->prepare($sql);
         $proses = $prepare->execute();
         $keterangan = $this->getKeterangan();
@@ -247,9 +247,9 @@ class Pengajuanservis
     public function queryKirimData()
     {
         $id_pengajuan_servis =$this->getIdpengajuanservis();
-        $status = $this->getStatus();
+        $id_status = $this->getIdStatus();
 
-        $sql = "UPDATE pengajuan_servis SET status='$status' where id_pengajuan_servis='$id_pengajuan_servis'";
+        $sql = "UPDATE pengajuan_servis SET id_status='$id_status' where id_pengajuan_servis='$id_pengajuan_servis'";
         $prepare = $this->konek->execute()->prepare($sql);
         $proses = $prepare->execute();
     }

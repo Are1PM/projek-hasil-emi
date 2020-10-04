@@ -35,9 +35,9 @@
           <td><?= $data->jenis_kendaraan ?></td>
           <td>
           <?php 
-          if ($data->status == "4") {
+          if ($data->id_status == 0) {
             echo "<span class='badge badge-warning'>Belum Dikirim</span>";
-          }elseif ($data->status == "0"){
+          }elseif ($data->id_status == 4){
             echo "<span class='badge badge-success'>Menunggu verifikasi admin</span>";
           } 
 
@@ -46,14 +46,14 @@
           <?php
             if ($_SESSION['hak_akses']!="unit_sla") { ?>
              <?php
-                if ($data->status=="4") { ?>
+                if ($data->id_status==0) { ?>
             <a href="?emi=ubah-pengajuanservis&id_pengajuan_servis=<?= $data->id_pengajuan_servis; ?>&parameter=1" class="btn btn-sm btn-warning"><i class="fa fa-pen"></i> Edit</a> |
             <?php } } ?>
             <a href="?emi=detail-pengajuanservis&id_pengajuan_servis=<?= $data->id_pengajuan_servis; ?>&parameter=1" class="btn btn-sm btn-info"><i class="fa fa-eye"></i> Detail</a> 
             <?php
             if ($_SESSION['hak_akses']!="unit_sla") { ?>
              <?php
-                if ($data->status=="4") { ?> |
+                if ($data->id_status==0) { ?> |
             <a href="?emi=hapus-pengajuanservis&id_pengajuan_servis=<?= $data->id_pengajuan_servis ?>" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Hapus</a> 
               <?php } } ?>
             <?php
@@ -63,7 +63,7 @@
             <?php
             if ($_SESSION['hak_akses']=="driver") { ?>
             <?php
-              if ($data->status=="4") { ?>
+              if ($data->id_status==0) { ?>
 
              |
             <a href="apps/pengajuan/pemeliharaan/proses-kirim-data.php?id_pengajuan_servis=<?= $data->id_pengajuan_servis; ?>" class="btn btn-sm btn-primary">Kirim</a>

@@ -10,10 +10,10 @@ if (isset($_POST['proses'])) {
   $id_sla = $_SESSION['id_sla'];
   $id_pengajuan_servis = $_POST['id_pengajuan_servis']; 
   $tanggal_persetujuan = date("Y-m-d");
-  $status = $_POST['status'];
+  $id_status = $_POST['id_status'];
   $keterangan =$_POST['keterangan'];
 
-  $update = new MengelolaPengajuanservis($id_pengajuan_servis,'','','','','','','',$status,$keterangan);
+  $update = new MengelolaPengajuanservis($id_pengajuan_servis,'','','','','','','',$id_status,$keterangan);
   $update->Konfirmasi();
 
   $konfirmasi = new MengelolaPersetujuanservis('',$id_sla,$id_pengajuan_servis,$tanggal_persetujuan);

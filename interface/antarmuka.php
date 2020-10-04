@@ -525,4 +525,12 @@ class AntarMuka
 		}
 	}
 	
+	public function tampilkanInfo()
+	{
+		$ldp = ($this->pengajuan_ldp->getCount())[0][0];
+		$bbm = ($this->pengajuan_ldp->getCount())[1][0];
+		$servis = ($this->pengajuan_ldp->getCount())[2][0];
+		require_once "template/info.php";
+	}
+	
 }

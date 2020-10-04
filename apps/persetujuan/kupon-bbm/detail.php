@@ -46,9 +46,9 @@
           <td>status</td>
           <td>
             <?php
-            if ($data->status == "1") {
+            if ($data->id_status == "1") {
               echo "<span class='badge badge-success'>Disetujui</span>";
-            } else if ($data->status =="2") {
+            } else if ($data->id_status =="2") {
               echo "<span class='badge badge-danger'>Ditolak</span>";
             }
             ?>
@@ -63,7 +63,7 @@
           <td><?= $data->nota ?></td>
         </tr>
         <?php
-        if ($data->status!="1") { ?>
+        if ($data->id_status!="1") { ?>
         <tr><td><b>Keterangan</b></td>
           <td><?= $data->keterangan ?></td> 
         </tr>

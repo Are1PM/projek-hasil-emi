@@ -26,9 +26,9 @@
           <td><?= $data->tanggal_persetujuan ?></td>
           <td>
             <?php
-            if ($data->status == "1") {
+            if ($data->id_status == "1") {
               echo "<span class='badge badge-success'>Disetujui</span>";
-            } else if ($data->status =="2") {
+            } else if ($data->id_status =="2") {
               echo "<span class='badge badge-danger'>Ditolak</span>";
             }
             ?>
@@ -45,7 +45,7 @@
 
           <td>
             <?php
-            if ($_SESSION['hak_akses']!="unit_sla" AND $data->status=="1") { ?>
+            if ($_SESSION['hak_akses']!="unit_sla" AND $data->id_status=="1") { ?>
             <a href="apps/persetujuan/kupon-bbm/cetakbbm.php?id_persetujuan_bbm=<?= $data->id_persetujuan_bbm; ?>&parameter=1" class="btn btn-sm btn-warning"><i class="fas fa-print"></i> Cetak</a> |
             <?php } ?>
             <a href="?emi=detail-persetujuanbbm&id_persetujuan_bbm=<?= $data->id_persetujuan_bbm; ?>&parameter=1" class="btn btn-sm btn-info"><i class="fa fa-eye"></i> Detail</a> |
@@ -54,7 +54,7 @@
             <a href="?emi=hapus-persetujuanbbm&id_persetujuan_bbm=<?= $data->id_persetujuan_bbm ?>" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Hapus</a>
             <?php } ?>
             <?php
-            if ($_SESSION['hak_akses']=="driver" AND $data->status=="1") { ?>
+            if ($_SESSION['hak_akses']=="driver" AND $data->id_status=="1") { ?>
             <a href="#" class="btn btn-sm btn-success upload-nota" data-id="<?= $data->id_persetujuan_bbm; ?>"><i class="fa fa-upload"></i> Nota</a>
             <?php } ?>
         </tr>

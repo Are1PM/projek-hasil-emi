@@ -1,30 +1,22 @@
 <?php
 
-class Unitsla
+class Driver
 {
-    public $Id_SLA,
-           $nama,
-           $alamat,
-           $no_hp,
+    public $id_driver,
+           $nama_driver,
            $username,
-           $password;
+           $password,
+           $No_HP,
+           $alamat;
 
-    function getIdSLA()
+    function getIdDriver()
     {
-        return $this->Id_SLA;
+        return $this->id_driver;
     }
 
-    function getNama()
+    function getNamaDriver()
     {
-        return $this->nama;
-    }
-    function getAlamat()
-    {
-        return $this->alamat;
-    }
-    function getNoHP()
-    {
-        return $this->no_hp;
+        return $this->nama_driver;
     }
     function getUsername()
     {
@@ -34,27 +26,31 @@ class Unitsla
     {
         return $this->password;
     }
+    function getNoHP()
+    {
+        return $this->No_HP;
+    }
+
+    function getAlamat()
+    {
+        return $this->alamat;
+    }
 
     
 
-    function setNip($Id_SLA)
+    function setIdDriver($id_driver)
     {
-        $this->Id_SLA = $Id_SLA;
+        $this->id_driver = $id_driver;
     }
 
-    function setNama($nama)
+    function setNamaDriver($nama_driver)
     {
-        $this->nama = $nama;
+        $this->nama_driver = $nama_driver;
     }
 
-    function setAlamat($alamat)
+    function setNoHP($No_HP)
     {
-        $this->alamat = $alamat;
-    }
-
-    function setNoHP($no_hp)
-    {
-        $this->no_hp = $no_hp;
+        $this->No_HP = $No_HP;
     }
 
     function setUsername($username)
@@ -67,18 +63,21 @@ class Unitsla
         $this->password = $password;
     }
 
-
-
-    public function queryMemasukkanUnitsla()
+    function setAlamat($alamat)
     {
-        $Id_SLA         =$this->getIdSLA();
-        $nama        =$this->getNama();
-        $alamat      =$this->getAlamat();
-        $no_hp       =$this->getNoHP();
+        $this->alamat = $alamat;
+    }
+
+    public function queryMemasukkanDriver()
+    {
+        $nama_driver =$this->getNamaDriver();
         $username    =$this->getUsername();
         $password    =$this->getPassword();
+        $no_hp       =$this->getNoHP();
+        $alamat      =$this->getAlamat();
 
-        $sql = "INSERT into unit_sla values ('$Id_SLA','$nama','$alamat','$no_hp','$username','$password')";
+
+        $sql = "INSERT into driver values (NULL, '$nama_driver','$username','$password','$no_hp','$alamat')";
         $prepare = $this->konek->execute()->prepare($sql);
         $proses = $prepare->execute();
 
@@ -95,7 +94,7 @@ class Unitsla
                             </div>
                             <br>
                               <div class="form-group">
-                                <a href="?emi=data-pegawai"><button class="btn btn-info">Lihat Data</button></a>
+                                <a href="?emi=data-driver"><button class="btn btn-info">Lihat Data</button></a>
                               </div>
                             </form>
                         </div>
@@ -109,17 +108,16 @@ class Unitsla
         }
     }
 
-    public function queryMengubahUnitsla()
+    public function queryMengubahDriver()
     {
-        $Id_SLA          = $this->getIdSLA();
-        $nama  = $this->getNama();
-        $alamat        = $this->getAlamat();
+        $id_driver     = $this->getIdDriver();
+        $nama_driver   = $this->getNamaDriver();
         $no_hp         = $this->getNoHP();
         $username      = $this->getUsername();
         $password      = $this->getPassword();
-        
+        $alamat        = $this->getAlamat();
 
-        $sql = "UPDATE unit_sla SET nama='$nama',alamat='$alamat',no_hp='$no_hp',username='$username',password='$password' where Id_SLA='$Id_SLA'";
+        $sql = "UPDATE driver SET nama_driver='$nama_driver',no_hp='$no_hp',username='$username',password='$password',alamat='$alamat' where id_driver='$id_driver'";
         $prepare = $this->konek->execute()->prepare($sql);
         $proses = $prepare->execute();
 
@@ -136,7 +134,7 @@ class Unitsla
                             </div>
                             <br>
                               <div class="form-group">
-                                <a href="?emi=data-pegawai"><button class="btn btn-info">Lihat Data</button></a>
+                                <a href="?emi=data-driver"><button class="btn btn-info">Lihat Data</button></a>
                               </div>
                             </form>
                         </div>
@@ -148,11 +146,11 @@ class Unitsla
         }
     }
 
-    public function queryMenghapusUnitsla()
+    public function queryMenghapusDriver()
     {
-        $Id_SLA = $this->getIdSLA();
+        $id_driver = $this->getIdDriver();
 
-        $sql = "DELETE from unit_sla where Id_SLA='$Id_SLA'";
+        $sql = "DELETE from driver where id_driver='$id_driver'";
         $prepare = $this->konek->execute()->prepare($sql);
         $proses = $prepare->execute();
 
@@ -163,32 +161,39 @@ class Unitsla
         }
     }
 
-    public function queryMencariUnitsla()
-    {
-           $Id_SLA     = $this->getIdSLA();
-           $nama   = $this->getNama();
-           $no_hp         = $this->getNoHP();
-           $username      = $this->getUsername();
-   
-           $sql= "SELECT * FROM unit_sla where Id_SLA='$Id_SLA' OR nama='$nama' OR no_hp='$no_hp' OR username='$username'";
-           $query = $this->konek->execute()->query($sql)->fetch(PDO::FETCH_OBJ);
-           
-           return $query;
+     public function queryMencariDriver()
+     {
+            $id_driver     = $this->getIdDriver();
+            $nama_driver   = $this->getNamaDriver();
+            $no_hp         = $this->getNoHP();
+            $username      = $this->getUsername();
+    
+            $sql= "SELECT * FROM driver where id_driver='$id_driver' OR nama_driver='$nama_driver' OR no_hp='$no_hp' OR username='$username'";
+            $query = $this->konek->execute()->query($sql)->fetch(PDO::FETCH_OBJ);
+            
+            return $query;
      }
-
-     
-     public function queryMelihatUnitsla()
+    public function queryMelihatDriver()
     {
-        $Id_SLA=isset($_SESSION['id_sla'])?$_SESSION['id_sla']:"";
-        $sql= "SELECT * FROM unit_sla where Id_SLA='$Id_SLA'";
+        $sql= "SELECT * FROM driver";
         $query = $this->konek->execute()->query($sql)->fetchAll(PDO::FETCH_OBJ);
         
         return $query;
     }
+
+    public function queryMelihatDriverKu()
+    {
+        $id_driver=$_SESSION['id_driver'];
+        $sql= "SELECT * FROM driver where id_driver='$id_driver'";
+        $query = $this->konek->execute()->query($sql)->fetchAll(PDO::FETCH_OBJ);
+        
+        return $query;
+    }
+
     
     public function queryCekLogin($username, $password)
     {
-        $sql= "SELECT * FROM unit_sla where username='$username' AND password='$password'";
+        $sql= "SELECT * FROM driver where username='$username' AND password='$password'";
         $query = $this->konek->execute()->query($sql)->fetchAll(PDO::FETCH_OBJ);
 
         return $query;

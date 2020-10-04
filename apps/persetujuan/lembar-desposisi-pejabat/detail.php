@@ -58,9 +58,9 @@
           <td>status</td>
           <td>
             <?php
-            if ($data->status ==1) {
+            if ($data->id_status ==1) {
               echo "<span class='badge badge-success'>Disetujui</span>";
-            } else if ($data->status ==2) {
+            } else if ($data->id_status ==2) {
               echo "<span class='badge badge-danger'>Ditolak</span>";
             }
             ?>

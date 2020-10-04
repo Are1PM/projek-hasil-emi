@@ -60,6 +60,11 @@ class MengelolaPengajuanldp extends Pengajuanldp
   {
         return $this->queryKonfirmasi();
     }
+  
+  public function getCount()
+  {
+      return $this->queryCount();
+  }
 }
 
 ?>

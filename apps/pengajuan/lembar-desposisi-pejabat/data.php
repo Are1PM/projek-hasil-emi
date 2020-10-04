@@ -26,6 +26,7 @@
       </thead>
       <tbody>
         <?php 
+
          foreach ($data_pengajuanldp as $data) { ?>
          
         <tr>
@@ -52,9 +53,9 @@
           <td><?= $data->jenis_kendaraan ?></td>
           <td>
           <?php 
-          if ($data->status == "4") {
+          if ($data->id_status == 0) {
             echo "<span class='badge badge-warning'>Belum Dikirim</span>";
-          }elseif ($data->status == "0"){
+          }elseif ($data->id_status == 4){
             echo "<span class='badge badge-success'>Menunggu verifikasi admin</span>";
           } 
 
@@ -63,7 +64,7 @@
           <?php
             if ($_SESSION['hak_akses']!="unit_sla") { ?>
                <?php
-                if ($data->status=="4") { ?>
+                if ($data->id_status==0) { ?>
                     <a href="?emi=ubah-pengajuanldp&id_pengajuan_ldp=<?= $data->id_pengajuan_ldp; ?>&parameter=1" class="btn btn-sm btn-warning"><i class="fa fa-pen"></i> Edit</a> |
 
             <?php } } ?>
@@ -71,7 +72,7 @@
             <?php
             if ($_SESSION['hak_akses']!="unit_sla") { ?>
               <?php
-                if ($data->status=="4") { ?>|
+                if ($data->id_status==0) { ?>|
                     <a href="?emi=hapus-pengajuanldp&id_pengajuan_ldp=<?= $data->id_pengajuan_ldp ?>" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Hapus</a>
             <?php }} ?>
             <?php
@@ -81,7 +82,7 @@
             <?php
             if ($_SESSION['hak_akses']=="pegawai") { ?>
             <?php
-              if ($data->status=="4") { ?>
+              if ($data->id_status==0) { ?>
 
              |
             <a href="apps/pengajuan/lembar-desposisi-pejabat/proses-kirim-data.php?id_pengajuan_ldp=<?= $data->id_pengajuan_ldp; ?>" class="btn btn-sm btn-primary">Kirim</a>

@@ -6,6 +6,7 @@ class MengelolaPengajuanldp extends Pengajuanldp
 	public function __construct($id_pengajuan_ldp ='',$tempat_tujuan ='',$kegiatan ='',$perihal ='',$tanggal_usulan='',$tanggal_berangkat='',$tanggal_kembali='',$kebutuhan_driver='',$id_driver='',$nip='',$id_kendaraan='',$id_status='',$keterangan='')
     {   
             $this->konek = new KoneksiBasisData();
+            // print_r($id_status);die;
 
             $this->id_pengajuan_ldp          = $id_pengajuan_ldp;
             $this->tempat_tujuan = $tempat_tujuan;

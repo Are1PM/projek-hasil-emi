@@ -1,5 +1,4 @@
 <?php
-
 class Pengajuanldp
 {
     public $id_pengajuan_ldp,
@@ -142,6 +141,7 @@ class Pengajuanldp
 
     public function queryMemasukkanPengajuanldp()
     {
+
         $id_pengajuan_ldp         =$this->getIdpengajuanldp();
         $tempat_tujuan=$this->getTempattujuan();
         $kegiatan      =$this->getKegiatan();
@@ -155,8 +155,6 @@ class Pengajuanldp
         $id_kendaraan    =$this->getIdkendaraan();
         $id_status    =$this->getIdstatus();
         $keterangan    =$this->getKeterangan();
-
-
 
 
 
@@ -209,7 +207,9 @@ class Pengajuanldp
 
         $sql = "UPDATE pengajuan_ldp SET tempat_tujuan='$tempat_tujuan',kegiatan='$kegiatan',perihal='$perihal',tanggal_usulan='$tanggal_usulan',tanggal_berangkat='$tanggal_berangkat',tanggal_kembali='$tanggal_kembali',kebutuhan_driver='$kebutuhan_driver',id_driver='$id_driver',nip='$nip',id_kendaraan='$id_kendaraan',keterangan='$keterangan' where id_pengajuan_ldp='$id_pengajuan_ldp'";
         $prepare = $this->konek->execute()->prepare($sql);
+        
         $proses = $prepare->execute();
+        
 
         if ($proses) {
             echo '<div id="myModal" class="modal fade" role="dialog">
@@ -253,7 +253,7 @@ class Pengajuanldp
 
      public function queryMencariPengajuanldp()
      {
-            $id_pengajuan_ldp           =$this->getIdpengajuanldp();
+            $id_pengajuan_ldp =$this->getIdpengajuanldp();
     
             $sql= "SELECT * FROM pengajuan_ldp inner join driver, pegawai, kendaraan where pengajuan_ldp.id_driver=driver.id_driver AND pengajuan_ldp.nip=pegawai.nip AND pengajuan_ldp.id_kendaraan=kendaraan.id_kendaraan AND id_pengajuan_ldp='$id_pengajuan_ldp'";
             $query = $this->konek->execute()->query($sql)->fetch(PDO::FETCH_OBJ);
@@ -262,16 +262,15 @@ class Pengajuanldp
      }
      public function queryMelihatPengajuanldp()
      {
-        $nip = $_SESSION['nip'];
+        $nip =isset($_SESSION['nip'])? $_SESSION['nip']:"";
         if ($_SESSION['hak_akses']=="unit_sla"){
-            $sql= "SELECT * FROM pengajuan_ldp p,driver d,pegawai pg,kendaraan k where d.id_driver=p.id_driver AND pg.nip=p.nip AND k.id_kendaraan=p.id_kendaraan AND p.status NOT IN ('1','2','4')";
+            $sql= "SELECT * FROM pengajuan_ldp p,driver d,pegawai pg,kendaraan k where d.id_driver=p.id_driver AND pg.nip=p.nip AND k.id_kendaraan=p.id_kendaraan AND p.id_status NOT IN ('1','2','0')";
             $query = $this->konek->execute()->query($sql)->fetchAll(PDO::FETCH_OBJ);
         }else{
-            $sql= "SELECT * FROM pengajuan_ldp p,driver d,pegawai pg,kendaraan k where p.nip=:'$nip' AND d.id_driver=:p.id_driver AND pg.nip=p.nip AND k.id_kendaraan=p.id_kendaraan AND p.status NOT IN ('1','2')";
+            $sql= "SELECT * FROM pengajuan_ldp p,driver d,pegawai pg,kendaraan k where p.nip='$nip' AND d.id_driver=p.id_driver AND pg.nip=p.nip AND k.id_kendaraan=p.id_kendaraan AND p.id_status NOT IN ('1','2')";
             $query = $this->konek->execute()->query($sql)->fetchAll(PDO::FETCH_OBJ);
-            // print_r($query->errorInfo());die;
+            
         }
-        
         return $query;
     }
     public function queryKonfirmasi()

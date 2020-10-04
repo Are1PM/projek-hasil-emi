@@ -95,7 +95,7 @@
                   $id_driver=$_POST['id_driver'];
                   $nip=$_POST['nip'];
                   $id_kendaraan=$_POST['id_kendaraan'];
-                  $status ='4';
+                  $status =0;
 
                   // for kendaraan
                   $status_kendaraan = "sedang diorder";

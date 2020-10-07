@@ -57,6 +57,11 @@ class MengelolaPengajuanbbm extends Pengajuanbbm
   {
       return $this->queryKirimData();
   }
+  
+  function getJumlahBbm(){
+    
+    return $this->queryJumlahIsiBensin();
+  }
       
 }
 

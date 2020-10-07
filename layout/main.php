@@ -241,8 +241,9 @@
 				$data = new MengelolaUnitsla($id_sla);
 				$data->MenghapusUnitsla();
 				$this->main->tampilUnitsla();
-            }else{
+			}elseif ($_GET['emi']== "info"){
 				$this->main->tampilkanInfo();
+            }else{
             	require_once "template/home.php";
             }
         }

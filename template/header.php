@@ -92,6 +92,14 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="?emi=info" class="nav-link">
+              <i class="nav-icon fas fa-home"></i>
+              <p>
+                Informasi
+              </p>
+            </a>
+          </li>
           <?php
             if ($_SESSION['hak_akses']=="unit_sla") { ?>
                 

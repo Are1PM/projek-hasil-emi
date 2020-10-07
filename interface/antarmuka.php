@@ -530,6 +530,8 @@ class AntarMuka
 		$ldp = ($this->pengajuan_ldp->getCount())[0][0];
 		$bbm = ($this->pengajuan_ldp->getCount())[1][0];
 		$servis = ($this->pengajuan_ldp->getCount())[2][0];
+		$jumlah_service = $this->pengajuan_servis->getJumlahServis();
+		$jumlah_isi_bensin = $this->pengajuan_kupon_bbm->getJumlahBbm();
 		require_once "template/info.php";
 	}
 	

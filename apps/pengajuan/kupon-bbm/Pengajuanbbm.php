@@ -264,7 +264,7 @@ class Pengajuanbbm
     
     public function queryJumlahIsiBensin()
     {
-        $sql = "SELECT k.jenis_kendaraan, COUNT(*) as jumlah_servis FROM pengajuan_kupon_bbm b, kendaraan k WHERE b.id_kendaraan=k.id_kendaraan AND b.id_status=1 GROUP BY k.id_kendaraan";
+        $sql = "SELECT k.jenis_kendaraan, COUNT(*) as jumlah_isi FROM pengajuan_kupon_bbm b, kendaraan k WHERE b.id_kendaraan=k.id_kendaraan AND b.id_status=1 GROUP BY k.id_kendaraan";
         $query = $this->konek->execute()->query($sql)->fetchAll(PDO::FETCH_OBJ);
         
         return $query;
@@ -277,4 +277,3 @@ class Pengajuanbbm
 
 
 }
-?>

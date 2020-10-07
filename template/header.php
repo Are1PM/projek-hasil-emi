@@ -94,7 +94,7 @@
           </li>
           <li class="nav-item">
             <a href="?emi=info" class="nav-link">
-              <i class="nav-icon fas fa-home"></i>
+              <i class="nav-icon fas fa-info"></i>
               <p>
                 Informasi
               </p>

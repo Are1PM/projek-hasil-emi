@@ -1,14 +1,12 @@
+<!-- /.content-header -->
 
-    <!-- /.content-header -->
-
-    <!-- Main content -->
-    <style type="text/css">
-  #tinggi{
+<!-- Main content -->
+<style type="text/css">
+  #tinggi {
     height: 1000px;
     width: 2400px;
 
   }
-
 </style>
 <div class="col-md-12">
   <div class="card">

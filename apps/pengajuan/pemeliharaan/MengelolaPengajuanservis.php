@@ -53,6 +53,12 @@ class MengelolaPengajuanservis extends Pengajuanservis
   {
       return $this->queryKonfirmasi();
   }
+  
+  function getJumlahServis(){
+    
+    return $this->queryJumlahServis();
+    
+  }
 }
 
 ?>

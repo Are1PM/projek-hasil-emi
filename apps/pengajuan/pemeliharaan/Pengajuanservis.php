@@ -253,6 +253,14 @@ class Pengajuanservis
         $prepare = $this->konek->execute()->prepare($sql);
         $proses = $prepare->execute();
     }
+    
+    public function queryJumlahServis()
+     {
+         $sql = "SELECT k.jenis_kendaraan, COUNT(*) as jumlah_servis FROM pengajuan_servis p, kendaraan k WHERE p.id_kendaraan=k.id_kendaraan AND p.id_status=1 GROUP BY k.id_kendaraan";
+         $query = $this->konek->execute()->query($sql)->fetchAll(PDO::FETCH_OBJ);
+         
+         return $query;
+     }
 
     function __destruct()
     {

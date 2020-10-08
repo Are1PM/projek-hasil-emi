@@ -51,7 +51,7 @@
           <td><?= $data->status ?></td>
         </tr>
         <td>Keterangan</td>
-          <td><?= $data->keterangan ?></td>
+        <td><?= $data->keterangan ?></td>
         </tr>
       </tbody>
     </table>

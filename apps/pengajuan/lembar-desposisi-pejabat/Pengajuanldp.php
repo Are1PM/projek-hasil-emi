@@ -2,18 +2,18 @@
 class Pengajuanldp
 {
     public $id_pengajuan_ldp,
-           $tempat_tujuan,
-           $kegiatan,
-           $perihal,
-           $tanggal_usulan,
-           $tanggal_berangkat,
-           $tanggal_kembali,
-           $kebutuhan_driver,
-           $id_driver,
-           $nip,
-           $id_kendaraan,
-           $id_status,
-           $keterangan;
+        $tempat_tujuan,
+        $kegiatan,
+        $perihal,
+        $tanggal_usulan,
+        $tanggal_berangkat,
+        $tanggal_kembali,
+        $kebutuhan_driver,
+        $id_driver,
+        $nip,
+        $id_kendaraan,
+        $id_status,
+        $keterangan;
 
     function getIdpengajuanldp()
     {
@@ -70,7 +70,7 @@ class Pengajuanldp
         return $this->keterangan;
     }
 
-    
+
 
     function setIdpengajuanldp($id_pengajuan_ldp)
     {
@@ -142,23 +142,23 @@ class Pengajuanldp
     public function queryMemasukkanPengajuanldp()
     {
 
-        $id_pengajuan_ldp         =$this->getIdpengajuanldp();
-        $tempat_tujuan=$this->getTempattujuan();
-        $kegiatan      =$this->getKegiatan();
-        $perihal       =$this->getPerihal();
-        $tanggal_usulan =$this->getTanggalusulan();
-        $tanggal_berangkat    =$this->getTanggalberangkat();
-        $tanggal_kembali    =$this->getTanggalkembali();
-        $kebutuhan_driver    =$this->getKebutuhandriver();
-        $id_driver    =$this->getIddriver();
-        $nip    =$this->getNip();
-        $id_kendaraan    =$this->getIdkendaraan();
-        $id_status    =$this->getIdstatus();
-        $keterangan    =$this->getKeterangan();
+        $id_pengajuan_ldp         = $this->getIdpengajuanldp();
+        $tempat_tujuan = $this->getTempattujuan();
+        $kegiatan      = $this->getKegiatan();
+        $perihal       = $this->getPerihal();
+        $tanggal_usulan = $this->getTanggalusulan();
+        $tanggal_berangkat    = $this->getTanggalberangkat();
+        $tanggal_kembali    = $this->getTanggalkembali();
+        $kebutuhan_driver    = $this->getKebutuhandriver();
+        $id_driver    = $this->getIddriver();
+        $nip    = $this->getNip();
+        $id_kendaraan    = $this->getIdkendaraan();
+        $id_status    = $this->getIdstatus();
+        $keterangan    = $this->getKeterangan();
 
 
 
-        $sql = "INSERT into pengajuan_ldp values (NULL,'$tempat_tujuan','$kegiatan','$perihal','$tanggal_usulan','$tanggal_berangkat','$tanggal_kembali','$kebutuhan_driver','$id_driver','$nip','$id_kendaraan','4','')";
+        $sql = "INSERT into pengajuan_ldp values (NULL,'$tempat_tujuan','$kegiatan','$perihal','$tanggal_usulan','$tanggal_berangkat','$tanggal_kembali','$kebutuhan_driver','$id_driver','$nip','$id_kendaraan','0','')";
         $prepare = $this->konek->execute()->prepare($sql);
         $proses = $prepare->execute();
 
@@ -182,7 +182,7 @@ class Pengajuanldp
                     </div>
                 </div>
             </div>';
-        }else{
+        } else {
             echo '<br><div class="alert alert-danger text-center">
                 Gagal
             </div>';
@@ -207,9 +207,9 @@ class Pengajuanldp
 
         $sql = "UPDATE pengajuan_ldp SET tempat_tujuan='$tempat_tujuan',kegiatan='$kegiatan',perihal='$perihal',tanggal_usulan='$tanggal_usulan',tanggal_berangkat='$tanggal_berangkat',tanggal_kembali='$tanggal_kembali',kebutuhan_driver='$kebutuhan_driver',id_driver='$id_driver',nip='$nip',id_kendaraan='$id_kendaraan',keterangan='$keterangan' where id_pengajuan_ldp='$id_pengajuan_ldp'";
         $prepare = $this->konek->execute()->prepare($sql);
-        
+
         $proses = $prepare->execute();
-        
+
 
         if ($proses) {
             echo '<div id="myModal" class="modal fade" role="dialog">
@@ -231,7 +231,7 @@ class Pengajuanldp
                     </div>
                 </div>
             </div>';
-        }else{
+        } else {
             echo "Gagal";
         }
     }
@@ -246,36 +246,35 @@ class Pengajuanldp
 
         if ($proses) {
             echo "berhasil di hapus";
-        }else{
+        } else {
             echo "Gagal";
         }
     }
 
-     public function queryMencariPengajuanldp()
-     {
-            $id_pengajuan_ldp =$this->getIdpengajuanldp();
-    
-            $sql= "SELECT * FROM pengajuan_ldp inner join driver, pegawai, kendaraan where pengajuan_ldp.id_driver=driver.id_driver AND pengajuan_ldp.nip=pegawai.nip AND pengajuan_ldp.id_kendaraan=kendaraan.id_kendaraan AND id_pengajuan_ldp='$id_pengajuan_ldp'";
-            $query = $this->konek->execute()->query($sql)->fetch(PDO::FETCH_OBJ);
-            
-            return $query;
-     }
-     public function queryMelihatPengajuanldp()
-     {
-        $nip =isset($_SESSION['nip'])? $_SESSION['nip']:"";
-        if ($_SESSION['hak_akses']=="unit_sla"){
-            $sql= "SELECT * FROM pengajuan_ldp p,driver d,pegawai pg,kendaraan k where d.id_driver=p.id_driver AND pg.nip=p.nip AND k.id_kendaraan=p.id_kendaraan AND p.id_status NOT IN ('1','2','0')";
+    public function queryMencariPengajuanldp()
+    {
+        $id_pengajuan_ldp = $this->getIdpengajuanldp();
+
+        $sql = "SELECT * FROM pengajuan_ldp inner join driver, pegawai, kendaraan where pengajuan_ldp.id_driver=driver.id_driver AND pengajuan_ldp.nip=pegawai.nip AND pengajuan_ldp.id_kendaraan=kendaraan.id_kendaraan AND id_pengajuan_ldp='$id_pengajuan_ldp'";
+        $query = $this->konek->execute()->query($sql)->fetch(PDO::FETCH_OBJ);
+
+        return $query;
+    }
+    public function queryMelihatPengajuanldp()
+    {
+        $nip = isset($_SESSION['nip']) ? $_SESSION['nip'] : "";
+        if ($_SESSION['hak_akses'] == "unit_sla") {
+            $sql = "SELECT * FROM pengajuan_ldp p,driver d,pegawai pg,kendaraan k where d.id_driver=p.id_driver AND pg.nip=p.nip AND k.id_kendaraan=p.id_kendaraan AND p.id_status NOT IN ('1','2','0')";
             $query = $this->konek->execute()->query($sql)->fetchAll(PDO::FETCH_OBJ);
-        }else{
-            $sql= "SELECT * FROM pengajuan_ldp p,driver d,pegawai pg,kendaraan k where p.nip='$nip' AND d.id_driver=p.id_driver AND pg.nip=p.nip AND k.id_kendaraan=p.id_kendaraan AND p.id_status NOT IN ('1','2')";
+        } else {
+            $sql = "SELECT * FROM pengajuan_ldp p,driver d,pegawai pg,kendaraan k where p.nip='$nip' AND d.id_driver=p.id_driver AND pg.nip=p.nip AND k.id_kendaraan=p.id_kendaraan AND p.id_status NOT IN ('1','2')";
             $query = $this->konek->execute()->query($sql)->fetchAll(PDO::FETCH_OBJ);
-            
         }
         return $query;
     }
     public function queryKonfirmasi()
     {
-        $id_pengajuan_ldp =$this->getIdpengajuanldp();
+        $id_pengajuan_ldp = $this->getIdpengajuanldp();
         $id_status = $this->getIdstatus();
         $keterangan = $this->getKeterangan();
 
@@ -286,33 +285,29 @@ class Pengajuanldp
 
     public function queryKirimData()
     {
-        $id_pengajuan_ldp =$this->getIdpengajuanldp();
+        $id_pengajuan_ldp = $this->getIdpengajuanldp();
         $id_status = $this->getIdstatus();
 
         $sql = "UPDATE pengajuan_ldp SET id_status='$id_status' where id_pengajuan_ldp='$id_pengajuan_ldp'";
         $prepare = $this->konek->execute()->prepare($sql);
         $proses = $prepare->execute();
     }
-    
+
     public function queryCount()
     {
         $query = "SELECT SUM(IF(id_status = 1, 1,0)) AS setuju, SUM(IF(id_status = 2, 1,0)) AS tolak FROM pengajuan_ldp";
         $ldp = $this->konek->execute()->query($query)->fetchAll(PDO::FETCH_OBJ);
-        
+
         $query = "SELECT SUM(IF(id_status = 1, 1,0)) AS setuju, SUM(IF(id_status = 2, 1,0)) AS tolak FROM pengajuan_kupon_bbm";
         $bbm = $this->konek->execute()->query($query)->fetchAll(PDO::FETCH_OBJ);
-        
+
         $query = "SELECT SUM(IF(id_status = 1, 1,0)) AS setuju, SUM(IF(id_status = 2, 1,0)) AS tolak FROM pengajuan_servis";
         $service = $this->konek->execute()->query($query)->fetchAll(PDO::FETCH_OBJ);
-        // print_r($proses);die;
+
         return [$ldp, $bbm, $service];
     }
 
     function __destruct()
     {
-
     }
-
-
 }
-?>

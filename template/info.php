@@ -66,7 +66,7 @@ $no_bbm = 1;
   </div>
   <!-- /.card-body -->
 </div>
-<?php if ($_SESSION['hak_akses'] == "unit_sla") : ?>
+<?php if ($_SESSION['hak_akses'] == "unit_sla" || $_SESSION['hak_akses'] == "unit_sla") : ?>
   <div class="row d-flex justify-content-around m-2">
     <div class="card col-md-5">
       <div class="card-header">

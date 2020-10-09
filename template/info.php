@@ -1,5 +1,6 @@
 <?php
-$no = 1;
+$no_servis = 1;
+$no_bbm = 1;
 ?>
 <div class="row d-flex justify-content-around m-2">
   <div class="card col-md-3">
@@ -78,7 +79,7 @@ $no = 1;
         <tbody>
           <?php foreach ($jumlah_servis as $dt) { ?>
             <tr>
-              <th scope="row"><?= $no++; ?></th>
+              <th scope="row"><?= $no_servis++; ?></th>
               <td><?= $dt->jenis_kendaraan ?></td>
               <td><?= $dt->jumlah_servis ?></td>
             </tr>
@@ -100,7 +101,7 @@ $no = 1;
         <tbody>
           <?php foreach ($jumlah_isi_bbm as $dt) { ?>
             <tr>
-              <th scope="row"><?= $no++; ?></th>
+              <th scope="row"><?= $no_bbm++; ?></th>
               <td><?= $dt->jenis_kendaraan ?></td>
               <td><?= $dt->jumlah_isi ?></td>
             </tr>

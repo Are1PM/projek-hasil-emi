@@ -66,51 +66,52 @@ $no_bbm = 1;
   </div>
   <!-- /.card-body -->
 </div>
+<?php if ($_SESSION['hak_akses'] == "unit_sla") : ?>
+  <div class="row d-flex justify-content-around m-2">
+    <div class="card col-md-5">
+      <div class="card-header">
+        Data mobil yang telah diservis
+      </div>
+      <!-- /.card-header -->
+      <div class="card-body">
 
-<div class="row d-flex justify-content-around m-2">
-  <div class="card col-md-5">
-    <div class="card-header">
-      Data mobil yang telah diservis
-    </div>
-    <!-- /.card-header -->
-    <div class="card-body">
+        <table class="table table-striped">
+          <tbody>
+            <?php foreach ($jumlah_servis as $dt) { ?>
+              <tr>
+                <th scope="row"><?= $no_servis++; ?></th>
+                <td><?= $dt->jenis_kendaraan ?></td>
+                <td><?= $dt->jumlah_servis ?></td>
+              </tr>
+            <?php } ?>
+          </tbody>
+        </table>
 
-      <table class="table table-striped">
-        <tbody>
-          <?php foreach ($jumlah_servis as $dt) { ?>
-            <tr>
-              <th scope="row"><?= $no_servis++; ?></th>
-              <td><?= $dt->jenis_kendaraan ?></td>
-              <td><?= $dt->jumlah_servis ?></td>
-            </tr>
-          <?php } ?>
-        </tbody>
-      </table>
-
-    </div>
-
-  </div>
-  <div class="card col-md-5">
-    <div class="card-header">
-      Data mobil yang telah diisi bensin
-    </div>
-    <!-- /.card-header -->
-    <div class="card-body">
-
-      <table class="table table-striped">
-        <tbody>
-          <?php foreach ($jumlah_isi_bbm as $dt) { ?>
-            <tr>
-              <th scope="row"><?= $no_bbm++; ?></th>
-              <td><?= $dt->jenis_kendaraan ?></td>
-              <td><?= $dt->jumlah_isi ?></td>
-            </tr>
-          <?php } ?>
-        </tbody>
-      </table>
+      </div>
 
     </div>
+    <div class="card col-md-5">
+      <div class="card-header">
+        Data mobil yang telah diisi bensin
+      </div>
+      <!-- /.card-header -->
+      <div class="card-body">
 
-  </div>
+        <table class="table table-striped">
+          <tbody>
+            <?php foreach ($jumlah_isi_bbm as $dt) { ?>
+              <tr>
+                <th scope="row"><?= $no_bbm++; ?></th>
+                <td><?= $dt->jenis_kendaraan ?></td>
+                <td><?= $dt->jumlah_isi ?></td>
+              </tr>
+            <?php } ?>
+          </tbody>
+        </table>
+
+      </div>
+
+    </div>
+  <?php endif; ?>
   <!-- /.card-body -->
-</div>
+  </div>

@@ -522,4 +522,9 @@ class AntarMuka
 		$jumlah_isi_bbm = $this->pengajuan_kupon_bbm->getJumlahBbm();
 		require_once "template/info.php";
 	}
+
+	public function tampilkanDetailInfo()
+	{
+		require_once "template/detail-info.php";
+	}
 }

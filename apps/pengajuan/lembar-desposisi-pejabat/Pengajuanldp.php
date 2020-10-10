@@ -278,9 +278,21 @@ class Pengajuanldp
         $id_status = $this->getIdstatus();
         $keterangan = $this->getKeterangan();
 
+
         $sql = "UPDATE pengajuan_ldp SET id_status='$id_status',keterangan='$keterangan' where id_pengajuan_ldp='$id_pengajuan_ldp'";
         $prepare = $this->konek->execute()->prepare($sql);
         $proses = $prepare->execute();
+
+        $stmt = $this->konek->execute()->prepare("SELECT * FROM pengajuan_ldp WHERE id_pengajuan_ldp='$id_pengajuan_ldp'");
+        $stmt->execute();
+        $ldp = $stmt->fetch(PDO::FETCH_OBJ);
+        $id_kendaraan = $ldp->id_kendaraan;
+
+        if ($id_status == 1) {
+            $sql = "UPDATE kendaraan SET id_status_kendaraan='2' where id_kendaraan='$id_kendaraan'";
+            $prepare_2 = $this->konek->execute()->prepare($sql);
+            $proses2 = $prepare_2->execute();
+        }
     }
 
     public function queryKirimData()

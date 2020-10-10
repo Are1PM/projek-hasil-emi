@@ -3,11 +3,11 @@
 class Unitsla
 {
     public $Id_SLA,
-           $nama,
-           $alamat,
-           $no_hp,
-           $username,
-           $password;
+        $nama,
+        $alamat,
+        $no_hp,
+        $username,
+        $password;
 
     function getIdSLA()
     {
@@ -35,11 +35,11 @@ class Unitsla
         return $this->password;
     }
 
-    
 
-    function setNip($Id_SLA)
+
+    function setNip($id_sla)
     {
-        $this->Id_SLA = $Id_SLA;
+        $this->Id_SLA = $id_sla;
     }
 
     function setNama($nama)
@@ -71,16 +71,16 @@ class Unitsla
 
     public function queryMemasukkanUnitsla()
     {
-        $Id_SLA         =$this->getIdSLA();
-        $nama        =$this->getNama();
-        $alamat      =$this->getAlamat();
-        $no_hp       =$this->getNoHP();
-        $username    =$this->getUsername();
-        $password    =$this->getPassword();
+        $nama        = $this->getNama();
+        $alamat      = $this->getAlamat();
+        $no_hp       = $this->getNoHP();
+        $username    = $this->getUsername();
+        $password    = $this->getPassword();
 
-        $sql = "INSERT into unit_sla values ('$Id_SLA','$nama','$alamat','$no_hp','$username','$password')";
+        $sql = "INSERT into unit_sla values (null,'$nama','$alamat','$no_hp','$username','$password')";
         $prepare = $this->konek->execute()->prepare($sql);
         $proses = $prepare->execute();
+
 
         if ($proses) {
             echo '<div id="myModal" class="modal fade" role="dialog">
@@ -95,14 +95,14 @@ class Unitsla
                             </div>
                             <br>
                               <div class="form-group">
-                                <a href="?emi=data-pegawai"><button class="btn btn-info">Lihat Data</button></a>
+                                <a href="?emi=data-unitsla"><button class="btn btn-info">Lihat Data</button></a>
                               </div>
                             </form>
                         </div>
                     </div>
                 </div>
             </div>';
-        }else{
+        } else {
             echo '<br><div class="alert alert-danger text-center">
                 Gagal
             </div>';
@@ -111,15 +111,15 @@ class Unitsla
 
     public function queryMengubahUnitsla()
     {
-        $Id_SLA          = $this->getIdSLA();
+        $id_sla          = $this->getIdSLA();
         $nama  = $this->getNama();
         $alamat        = $this->getAlamat();
         $no_hp         = $this->getNoHP();
         $username      = $this->getUsername();
         $password      = $this->getPassword();
-        
 
-        $sql = "UPDATE unit_sla SET nama='$nama',alamat='$alamat',no_hp='$no_hp',username='$username',password='$password' where Id_SLA='$Id_SLA'";
+
+        $sql = "UPDATE unit_sla SET nama='$nama',alamat='$alamat',no_hp='$no_hp',username='$username',password='$password' where id_sla='$id_sla'";
         $prepare = $this->konek->execute()->prepare($sql);
         $proses = $prepare->execute();
 
@@ -136,59 +136,59 @@ class Unitsla
                             </div>
                             <br>
                               <div class="form-group">
-                                <a href="?emi=data-pegawai"><button class="btn btn-info">Lihat Data</button></a>
+                                <a href="?emi=data-unitsla"><button class="btn btn-info">Lihat Data</button></a>
                               </div>
                             </form>
                         </div>
                     </div>
                 </div>
             </div>';
-        }else{
+        } else {
             echo "Gagal";
         }
     }
 
     public function queryMenghapusUnitsla()
     {
-        $Id_SLA = $this->getIdSLA();
+        $id_sla = $this->getIdSLA();
 
-        $sql = "DELETE from unit_sla where Id_SLA='$Id_SLA'";
+        $sql = "DELETE from unit_sla where Id_SLA='$id_sla'";
         $prepare = $this->konek->execute()->prepare($sql);
         $proses = $prepare->execute();
 
         if ($proses) {
             echo "berhasil di hapus";
-        }else{
+        } else {
             echo "Gagal";
         }
     }
 
     public function queryMencariUnitsla()
     {
-           $Id_SLA     = $this->getIdSLA();
-           $nama   = $this->getNama();
-           $no_hp         = $this->getNoHP();
-           $username      = $this->getUsername();
-   
-           $sql= "SELECT * FROM unit_sla where Id_SLA='$Id_SLA' OR nama='$nama' OR no_hp='$no_hp' OR username='$username'";
-           $query = $this->konek->execute()->query($sql)->fetch(PDO::FETCH_OBJ);
-           
-           return $query;
-     }
+        $id_sla     = $this->getIdSLA();
+        $nama   = $this->getNama();
+        $no_hp         = $this->getNoHP();
+        $username      = $this->getUsername();
 
-     
-     public function queryMelihatUnitsla()
-    {
-        $Id_SLA=isset($_SESSION['id_sla'])?$_SESSION['id_sla']:"";
-        $sql= "SELECT * FROM unit_sla where Id_SLA='$Id_SLA'";
-        $query = $this->konek->execute()->query($sql)->fetchAll(PDO::FETCH_OBJ);
-        
+        $sql = "SELECT * FROM unit_sla where Id_SLA='$id_sla' OR nama='$nama' OR no_hp='$no_hp' OR username='$username'";
+        $query = $this->konek->execute()->query($sql)->fetch(PDO::FETCH_OBJ);
+
         return $query;
     }
-    
+
+
+    public function queryMelihatUnitsla()
+    {
+        $id_sla = isset($_SESSION['id_sla']) ? $_SESSION['id_sla'] : "";
+        $sql = "SELECT * FROM unit_sla";
+        $query = $this->konek->execute()->query($sql)->fetchAll(PDO::FETCH_OBJ);
+
+        return $query;
+    }
+
     public function queryCekLogin($username, $password)
     {
-        $sql= "SELECT * FROM unit_sla where username='$username' AND password='$password'";
+        $sql = "SELECT * FROM unit_sla where username='$username' AND password='$password'";
         $query = $this->konek->execute()->query($sql)->fetchAll(PDO::FETCH_OBJ);
 
         return $query;
@@ -196,9 +196,5 @@ class Unitsla
 
     function __destruct()
     {
-
     }
-
-
 }
-?>

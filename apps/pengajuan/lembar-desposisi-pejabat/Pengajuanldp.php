@@ -255,7 +255,7 @@ class Pengajuanldp
     {
         $id_pengajuan_ldp = $this->getIdpengajuanldp();
 
-        $sql = "SELECT * FROM pengajuan_ldp inner join driver, pegawai, kendaraan where pengajuan_ldp.id_driver=driver.id_driver AND pengajuan_ldp.nip=pegawai.nip AND pengajuan_ldp.id_kendaraan=kendaraan.id_kendaraan AND id_pengajuan_ldp='$id_pengajuan_ldp'";
+        $sql = "SELECT * FROM pengajuan_ldp inner join driver, pegawai, status, kendaraan where pengajuan_ldp.id_driver=driver.id_driver AND pengajuan_ldp.nip=pegawai.nip AND pengajuan_ldp.id_kendaraan=kendaraan.id_kendaraan AND pengajuan_ldp.id_status=status.id_status AND id_pengajuan_ldp='$id_pengajuan_ldp'";
         $query = $this->konek->execute()->query($sql)->fetch(PDO::FETCH_OBJ);
 
         return $query;

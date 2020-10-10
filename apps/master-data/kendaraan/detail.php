@@ -1,6 +1,10 @@
 <div class="card">
   <div class="card-header">
-    <a href="?emi=tambah-driver" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> Tambah data</a>
+    <?php if (isset($_GET['plus']) && $_GET['plus'] == 'info') : ?>
+      <a href="?emi=info" class="btn btn-sm btn-warning"><i class="fa fa-arrow-left"></i> Kembali</a>
+    <?php else : ?>
+      <a href="?emi=tambah-driver" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> Tambah data</a>
+    <?php endif; ?>
   </div>
   <!-- /.card-header -->
   <div class="card-body">

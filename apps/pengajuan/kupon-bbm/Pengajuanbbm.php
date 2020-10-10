@@ -3,15 +3,15 @@
 class Pengajuanbbm
 {
     public $id_pengajuan_kupon_bbm,
-           $tanggal_pengajuan,
-           $tanggal_pengisian,
-           $id_jenis_bbm,
-           $id_jarak_tempuh,
-           $id_driver,
-           $id_spbu,
-           $id_kendaraan,
-           $id_status,
-           $keterangan;
+        $tanggal_pengajuan,
+        $tanggal_pengisian,
+        $id_jenis_bbm,
+        $id_jarak_tempuh,
+        $id_driver,
+        $id_spbu,
+        $id_kendaraan,
+        $id_status,
+        $keterangan;
 
     function getIdpengajuanbbm()
     {
@@ -54,9 +54,9 @@ class Pengajuanbbm
     {
         return $this->keterangan;
     }
-    
 
-    
+
+
 
     function setIdpengajuanbbm($id_pengajuan_kupon_bbm)
     {
@@ -110,24 +110,22 @@ class Pengajuanbbm
 
     public function queryMemasukkanPengajuanbbm()
     {
-        $id_pengajuan_kupon_bbm         =$this->getIdpengajuanbbm();
-        $tanggal_pengajuan=$this->getTanggalpengajuan();
-        $tanggal_pengisian      =$this->getTanggalpengisian();
-        $id_jarak_tempuh       =$this->getIdjaraktempuh();
-        $id_jenis_bbm =$this->getIdjenisbbm();
-        $id_driver    =$this->getIddriver();
-        $id_spbu    =$this->getIdspbu();
-        $id_kendaraan    =$this->getIdkendaraan();
+        $id_pengajuan_kupon_bbm         = $this->getIdpengajuanbbm();
+        $tanggal_pengajuan = $this->getTanggalpengajuan();
+        $tanggal_pengisian      = $this->getTanggalpengisian();
+        $id_jarak_tempuh       = $this->getIdjaraktempuh();
+        $id_jenis_bbm = $this->getIdjenisbbm();
+        $id_driver    = $this->getIddriver();
+        $id_spbu    = $this->getIdspbu();
+        $id_kendaraan    = $this->getIdkendaraan();
 
         $sql = "INSERT into pengajuan_kupon_bbm values (NULL,'$tanggal_pengajuan','$tanggal_pengisian','$id_jarak_tempuh','$id_jenis_bbm','$id_driver','$id_spbu','$id_kendaraan','0','')";
         $prepare = $this->konek->execute()->prepare($sql);
         $proses = $prepare->execute();
 
-        if($jarak_tempuh==100)
-        {
+        if ($jarak_tempuh == 100) {
             $voucher = 150000;
-        }else if($jarak_tempuh==200)
-        {
+        } else if ($jarak_tempuh == 200) {
             $voucher = 300000;
         }
 
@@ -151,7 +149,7 @@ class Pengajuanbbm
                     </div>
                 </div>
             </div>';
-        }else{
+        } else {
             echo '<br><div class="alert alert-danger text-center">
                 Gagal
             </div>';
@@ -170,7 +168,7 @@ class Pengajuanbbm
         $id_kendaraan      = $this->getIdkendaraan();
         $id_status     = $this->getIdstatus();
         $keterangan     = $this->getKeterangan();
-        
+
 
         $sql = "UPDATE pengajuan_kupon_bbm SET tanggal_pengajuan='$tanggal_pengajuan',tanggal_pengisian='$tanggal_pengisian',id_jarak_tempuh='$id_jarak_tempuh',id_jenis_bbm='$id_jenis_bbm',id_driver='$id_driver',id_spbu='$id_spbu',id_kendaraan='$id_kendaraan', id_status='$id_status',keterangan='$keterangan' where id_pengajuan_kupon_bbm='$id_pengajuan_kupon_bbm'";
         $prepare = $this->konek->execute()->prepare($sql);
@@ -196,7 +194,7 @@ class Pengajuanbbm
                     </div>
                 </div>
             </div>';
-        }else{
+        } else {
             echo "Gagal";
         }
     }
@@ -211,29 +209,29 @@ class Pengajuanbbm
 
         if ($proses) {
             echo "berhasil di hapus";
-        }else{
+        } else {
             echo "Gagal";
         }
     }
 
-     public function queryMencariPengajuanbbm()
-     {
-            $id_pengajuan_kupon_bbm =$this->getIdpengajuanbbm();
-    
-            $sql= "SELECT * FROM pengajuan_kupon_bbm inner join driver, spbu, kendaraan, jarak_tempuh, jenis_bbm where pengajuan_kupon_bbm.id_driver=driver.id_driver AND pengajuan_kupon_bbm.id_spbu=spbu.id_spbu AND pengajuan_kupon_bbm.id_kendaraan=kendaraan.id_kendaraan AND jarak_tempuh.id_jarak_tempuh=pengajuan_kupon_bbm.id_jarak_tempuh AND jenis_bbm.id_jenis_bbm=pengajuan_kupon_bbm.id_jenis_bbm AND id_pengajuan_kupon_bbm='$id_pengajuan_kupon_bbm'";
-            $query = $this->konek->execute()->query($sql)->fetch(PDO::FETCH_OBJ);
-            
-            return $query;
-     }
-     public function queryMelihatPengajuanbbm()
-     {
-        $id_driver = isset($_SESSION['id_driver'])?$_SESSION['id_driver']:"";
-        if ($_SESSION['hak_akses']=="unit_sla"){
-            $sql= "SELECT * FROM pengajuan_kupon_bbm p,spbu s, kendaraan k, driver d, jarak_tempuh j, jenis_bbm b where s.id_spbu=p.id_spbu AND k.id_kendaraan=p.id_kendaraan AND d.id_driver=p.id_driver AND j.id_jarak_tempuh=p.id_jarak_tempuh AND b.id_jenis_bbm=p.id_jenis_bbm AND p.id_status NOT IN ('1','2')";
-        }else{
-            $sql= "SELECT * FROM pengajuan_kupon_bbm p,spbu s, kendaraan k, driver d, jarak_tempuh j, jenis_bbm b where p.id_driver='$id_driver' AND s.id_spbu=p.id_spbu AND k.id_kendaraan=p.id_kendaraan AND d.id_driver=p.id_driver AND j.id_jarak_tempuh=p.id_jarak_tempuh AND b.id_jenis_bbm=p.id_jenis_bbm AND p.id_status NOT IN ('1','2')";
+    public function queryMencariPengajuanbbm()
+    {
+        $id_pengajuan_kupon_bbm = $this->getIdpengajuanbbm();
+
+        $sql = "SELECT * FROM pengajuan_kupon_bbm inner join driver, spbu, kendaraan, jarak_tempuh, jenis_bbm where pengajuan_kupon_bbm.id_driver=driver.id_driver AND pengajuan_kupon_bbm.id_spbu=spbu.id_spbu AND pengajuan_kupon_bbm.id_kendaraan=kendaraan.id_kendaraan AND jarak_tempuh.id_jarak_tempuh=pengajuan_kupon_bbm.id_jarak_tempuh AND jenis_bbm.id_jenis_bbm=pengajuan_kupon_bbm.id_jenis_bbm AND id_pengajuan_kupon_bbm='$id_pengajuan_kupon_bbm'";
+        $query = $this->konek->execute()->query($sql)->fetch(PDO::FETCH_OBJ);
+
+        return $query;
+    }
+    public function queryMelihatPengajuanbbm()
+    {
+        $id_driver = isset($_SESSION['id_driver']) ? $_SESSION['id_driver'] : "";
+        if ($_SESSION['hak_akses'] == "unit_sla") {
+            $sql = "SELECT * FROM pengajuan_kupon_bbm p,spbu s, kendaraan k, driver d, jarak_tempuh j, jenis_bbm b where s.id_spbu=p.id_spbu AND k.id_kendaraan=p.id_kendaraan AND d.id_driver=p.id_driver AND j.id_jarak_tempuh=p.id_jarak_tempuh AND b.id_jenis_bbm=p.id_jenis_bbm AND p.id_status NOT IN ('1','2')";
+        } else {
+            $sql = "SELECT * FROM pengajuan_kupon_bbm p,spbu s, kendaraan k, driver d, jarak_tempuh j, jenis_bbm b where p.id_driver='$id_driver' AND s.id_spbu=p.id_spbu AND k.id_kendaraan=p.id_kendaraan AND d.id_driver=p.id_driver AND j.id_jarak_tempuh=p.id_jarak_tempuh AND b.id_jenis_bbm=p.id_jenis_bbm AND p.id_status NOT IN ('1','2')";
         }
-        
+
 
         $query = $this->konek->execute()->query($sql)->fetchAll(PDO::FETCH_OBJ);
         return $query;
@@ -241,10 +239,10 @@ class Pengajuanbbm
 
     public function queryKonfirmasi()
     {
-        $id_pengajuan_kupon_bbm =$this->getIdpengajuanbbm();
+        $id_pengajuan_kupon_bbm = $this->getIdpengajuanbbm();
         $id_status = $this->getIdstatus();
         $keterangan = $this->getKeterangan();
-   
+
 
         $sql = "UPDATE pengajuan_kupon_bbm SET id_status='$id_status',keterangan='$keterangan' where id_pengajuan_kupon_bbm='$id_pengajuan_kupon_bbm'";
         $prepare = $this->konek->execute()->prepare($sql);
@@ -253,27 +251,23 @@ class Pengajuanbbm
 
     public function queryKirimData()
     {
-        $id_pengajuan_kupon_bbm =$this->getIdpengajuanbbm();
+        $id_pengajuan_kupon_bbm = $this->getIdpengajuanbbm();
         $id_status = $this->getIdstatus();
 
         $sql = "UPDATE pengajuan_kupon_bbm SET id_status='$id_status' where id_pengajuan_kupon_bbm='$id_pengajuan_kupon_bbm'";
         $prepare = $this->konek->execute()->prepare($sql);
         $proses = $prepare->execute();
-
     }
-    
+
     public function queryJumlahIsiBensin()
     {
-        $sql = "SELECT k.jenis_kendaraan, COUNT(*) as jumlah_isi FROM pengajuan_kupon_bbm b, kendaraan k WHERE b.id_kendaraan=k.id_kendaraan AND b.id_status=1 GROUP BY k.id_kendaraan";
+        $sql = "SELECT k.id_kendaraan, k.jenis_kendaraan,k.plat, COUNT(*) as jumlah_isi FROM pengajuan_kupon_bbm b, kendaraan k WHERE b.id_kendaraan=k.id_kendaraan AND b.id_status=1 GROUP BY k.id_kendaraan";
         $query = $this->konek->execute()->query($sql)->fetchAll(PDO::FETCH_OBJ);
-        
+
         return $query;
     }
 
     function __destruct()
     {
-
     }
-
-
 }

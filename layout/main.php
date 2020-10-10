@@ -231,20 +231,18 @@
 					} elseif ($_GET['emi'] == "data-unitsla") {
 						$this->main->tampilUnitsla();
 					} elseif ($_GET['emi'] == "tambah-unitsla") {
-						$this->main->formUnitsla();
+						$this->main->formUnitsla($parameter);
 					} elseif ($_GET['emi'] == "detail-unitsla") {
 						$this->main->tampilUnitsla($parameter);
 					} elseif ($_GET['emi'] == "ubah-unitsla") {
 						$this->main->formUnitsla($parameter);
 					} elseif ($_GET['emi'] == "hapus-unitsla") {
-						$id_sla = $_GET['id_sla'];
-						$data = new MengelolaUnitsla($id_sla);
+						$Id_SLA = $_GET['Id_SLA'];
+						$data = new MengelolaUnitsla($Id_SLA);
 						$data->MenghapusUnitsla();
 						$this->main->tampilUnitsla();
 					} elseif ($_GET['emi'] == "info") {
 						$this->main->tampilkanInfo();
-					} elseif ($_GET['emi'] == "detail-info") {
-						$this->main->tampilkanDetailInfo();
 					} else {
 						require_once "template/home.php";
 					}

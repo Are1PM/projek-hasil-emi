@@ -3,10 +3,10 @@
 class Kendaraan
 {
     public $id_kendaraan,
-           $jenis_kendaraan,
-           $plat,
-           $tanggal_masuk,
-           $id_status_kendaraan;
+        $jenis_kendaraan,
+        $plat,
+        $tanggal_masuk,
+        $id_status_kendaraan;
 
     function getIdkendaraan()
     {
@@ -31,7 +31,7 @@ class Kendaraan
     }
 
 
-    
+
 
     function setIdkendaraan($id_kendaraan)
     {
@@ -61,10 +61,10 @@ class Kendaraan
 
     public function queryMemasukkanKendaraan()
     {
-        $jenis_kendaraan =$this->getJeniskendaraan();
-        $plat    =$this->getPlat();
-        $tanggal_masuk    =$this->getTanggalmasuk();
-        $id_status_kendaraan       =$this->getIdstatuskendaraan();
+        $jenis_kendaraan = $this->getJeniskendaraan();
+        $plat    = $this->getPlat();
+        $tanggal_masuk    = $this->getTanggalmasuk();
+        $id_status_kendaraan       = $this->getIdstatuskendaraan();
 
         $sql = "INSERT into kendaraan values (NULL, '$jenis_kendaraan','$plat','$tanggal_masuk','$id_status_kendaraan')";
         $prepare = $this->konek->execute()->prepare($sql);
@@ -90,7 +90,7 @@ class Kendaraan
                     </div>
                 </div>
             </div>';
-        }else{
+        } else {
             echo '<br><div class="alert alert-danger text-center">
                 Gagal
             </div>';
@@ -129,11 +129,11 @@ class Kendaraan
                     </div>
                 </div>
             </div>';
-        }else{
+        } else {
             echo "Gagal";
         }
     }
-    
+
     public function queryTundaKendaraan()
     {
         $id_kendaraan     = $this->getIdkendaraan();
@@ -152,7 +152,6 @@ class Kendaraan
         $sql = "UPDATE kendaraan SET id_status_kendaraan='$id_status_kendaraan' where id_kendaraan='$id_kendaraan'";
         $prepare = $this->konek->execute()->prepare($sql);
         $proses = $prepare->execute();
-
     }
 
     public function queryMenghapusKendaraan()
@@ -165,39 +164,35 @@ class Kendaraan
 
         if ($proses) {
             echo "berhasil di hapus";
-        }else{
+        } else {
             echo "Gagal";
         }
     }
 
-     public function queryMencariKendaraan()
-     {
-            $id_kendaraan     = $this->getIdkendaraan();
-            $jenis_kendaraan   = $this->getJeniskendaraan();
-            $plat         = $this->getPlat();
-            $tanggal_masuk      = $this->getTanggalmasuk();
-            $id_status_kendaraan             = $this->getIdstatuskendaraan();
-    
-            $sql= "SELECT * FROM kendaraan where id_kendaraan='$id_kendaraan' OR jenis_kendaraan='$jenis_kendaraan' OR plat='$plat' OR tanggal_masuk='$tanggal_masuk' OR id_status_kendaraan='$id_status_kendaraan'";
-            $query = $this->konek->execute()->query($sql)->fetch(PDO::FETCH_OBJ);
-            
-            return $query;
-     }
-     public function queryMelihatKendaraan()
-     {
-        $sql= "SELECT * FROM kendaraan inner join status_kendaraan where kendaraan.id_status_kendaraan=status_kendaraan.id_status_kendaraan ";
+    public function queryMencariKendaraan()
+    {
+        $id_kendaraan     = $this->getIdkendaraan();
+        $jenis_kendaraan   = $this->getJeniskendaraan();
+        $plat         = $this->getPlat();
+        $tanggal_masuk      = $this->getTanggalmasuk();
+        $id_status_kendaraan             = $this->getIdstatuskendaraan();
+
+        $sql = "SELECT * FROM kendaraan INNER JOIN status_kendaraan ON kendaraan.id_status_kendaraan=status_kendaraan.id_status_kendaraan where kendaraan.id_kendaraan='$id_kendaraan' OR kendaraan.jenis_kendaraan='$jenis_kendaraan' OR kendaraan.plat='$plat' OR kendaraan.tanggal_masuk='$tanggal_masuk' OR kendaraan.id_status_kendaraan='$id_status_kendaraan'";
+        $query = $this->konek->execute()->query($sql)->fetch(PDO::FETCH_OBJ);
+
+        return $query;
+    }
+    public function queryMelihatKendaraan()
+    {
+        $sql = "SELECT * FROM kendaraan inner join status_kendaraan where kendaraan.id_status_kendaraan=status_kendaraan.id_status_kendaraan ";
         $query = $this->konek->execute()->query($sql)->fetchAll(PDO::FETCH_OBJ);
-        
+
         return $query;
     }
 
-    
+
 
     function __destruct()
     {
-
     }
-
-
 }
-?>

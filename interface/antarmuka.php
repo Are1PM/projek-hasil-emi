@@ -92,7 +92,7 @@ class AntarMuka
 		$this->id_pengajuan_kupon_bbm = isset($_GET['id_pengajuan_kupon_bbm']) ? $_GET['id_pengajuan_kupon_bbm'] : "";
 		$this->id_pengajuan_servis = isset($_GET['id_pengajuan_servis']) ? $_GET['id_pengajuan_servis'] : "";
 		$this->id_status = isset($_GET['id_status']) ? $_GET['id_status'] : "";
-		$this->id_sla = isset($_GET['id_sla']) ? $_GET['id_sla'] : "";
+		$this->id_sla = isset($_GET['Id_SLA']) ? $_GET['Id_SLA'] : "";
 		$this->id_persetujuan_bbm = isset($_GET['id_persetujuan_bbm']) ? $_GET['id_persetujuan_bbm'] : "";
 		$this->id_persetujuan_ldp = isset($_GET['id_persetujuan_ldp']) ? $_GET['id_persetujuan_ldp'] : "";
 		$this->id_persetujuan_servis = isset($_GET['id_persetujuan_servis']) ? $_GET['id_persetujuan_servis'] : "";
@@ -521,10 +521,5 @@ class AntarMuka
 		$jumlah_servis = $this->pengajuan_servis->getJumlahServis();
 		$jumlah_isi_bbm = $this->pengajuan_kupon_bbm->getJumlahBbm();
 		require_once "template/info.php";
-	}
-
-	public function tampilkanDetailInfo()
-	{
-		require_once "template/detail-info.php";
 	}
 }

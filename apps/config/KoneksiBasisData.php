@@ -5,9 +5,9 @@ error_reporting(0);
 class KoneksiBasisData
 {
 	private $host,
-		  	$database,
-		  	$username,
-		  	$password;
+		$database,
+		$username,
+		$password;
 
 	function __construct()
 	{
@@ -19,8 +19,8 @@ class KoneksiBasisData
 
 	function execute()
 	{
-		$open = new PDO('mysql:host='.$this->host.';dbname='.$this->database,$this->username,$this->password);
-			return $open;
+		$open = new PDO('mysql:host=' . $this->host . ';dbname=' . $this->database, $this->username, $this->password);
+		return $open;
 	}
 
 	function open($host, $database, $username, $password)
@@ -29,7 +29,6 @@ class KoneksiBasisData
 		$this->database = $database;
 		$this->username = $username;
 		$this->password = $password;
-
 	}
 
 	function getResult()
@@ -47,10 +46,5 @@ class KoneksiBasisData
 
 	function __destruct()
 	{
-
 	}
-	
-
 }
-
-?>

@@ -262,6 +262,19 @@ class Pengajuanservis
         return $query;
     }
 
+    public function queryFilterPengajuanservis($id_status)
+    {
+        $id_driver = isset($_SESSION['id_driver']) ? $_SESSION['id_driver'] : "";
+        if ($_SESSION['hak_akses'] == "unit_sla") {
+            $sql = "SELECT * FROM pengajuan_servis inner join driver, tempat_servis, kendaraan where  pengajuan_servis.id_tempat_servis=tempat_servis.id_tempat_servis AND pengajuan_servis.id_kendaraan=kendaraan.id_kendaraan AND driver.id_driver=pengajuan_servis.id_driver AND pengajuan_servis.id_status='$id_status'";
+        } else {
+            $sql = "SELECT * FROM pengajuan_servis inner join driver, tempat_servis, kendaraan where pengajuan_servis.id_driver='$id_driver' AND tempat_servis.id_tempat_servis=pengajuan_servis.id_tempat_servis AND kendaraan.id_kendaraan=pengajuan_servis.id_kendaraan AND driver.id_driver=pengajuan_servis.id_driver AND pengajuan_servis.id_status='$id_status'";
+        }
+
+        $query = $this->konek->execute()->query($sql)->fetchAll(PDO::FETCH_OBJ);
+        return $query;
+    }
+
     function __destruct()
     {
     }

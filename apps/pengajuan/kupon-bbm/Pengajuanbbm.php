@@ -269,14 +269,15 @@ class Pengajuanbbm
 
     public function queryFilterPengajuanbbm($id_status)
     {
-        $id_driver = isset($_SESSION['id_driver']) ? $_SESSION['id_driver'] : "";
+
         if ($_SESSION['hak_akses'] == "unit_sla") {
-            $sql = "SELECT * FROM pengajuan_kupon_bbm p,spbu s, kendaraan k, driver d, jarak_tempuh j, jenis_bbm b where s.id_spbu=p.id_spbu AND k.id_kendaraan=p.id_kendaraan AND d.id_driver=p.id_driver AND j.id_jarak_tempuh=p.id_jarak_tempuh AND b.id_jenis_bbm=p.id_jenis_bbm AND p.id_status ='$id_status')";
+            $sql = "SELECT * FROM pengajuan_kupon_bbm p,spbu s, kendaraan k, driver d where s.id_spbu=p.id_spbu AND k.id_kendaraan=p.id_kendaraan AND d.id_driver=p.id_driver AND p.id_status=$id_status";
         } else {
-            $sql = "SELECT * FROM pengajuan_kupon_bbm p,spbu s, kendaraan k, driver d, jarak_tempuh j, jenis_bbm b where p.id_driver='$id_driver' AND s.id_spbu=p.id_spbu AND k.id_kendaraan=p.id_kendaraan AND d.id_driver=p.id_driver AND j.id_jarak_tempuh=p.id_jarak_tempuh AND b.id_jenis_bbm=p.id_jenis_bbm AND p.id_status='$id_status'";
+            $sql = "SELECT * FROM pengajuan_kupon_bbm p, spbu s, kendaraan k, driver d where s.id_spbu=p.id_spbu AND k.id_kendaraan=p.id_kendaraan AND d.id_driver=p.id_driver AND p.id_status=$id_status";
         }
 
         $query = $this->konek->execute()->query($sql)->fetchAll(PDO::FETCH_OBJ);
+
         return $query;
     }
 

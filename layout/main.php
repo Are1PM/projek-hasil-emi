@@ -243,6 +243,8 @@
 						$this->main->tampilUnitsla();
 					} elseif ($_GET['emi'] == "info") {
 						$this->main->tampilkanInfo();
+					} elseif ($_GET['emi'] == "detail-info") {
+						$this->main->tampilkanDetailInfo();
 					} else {
 						require_once "template/home.php";
 					}

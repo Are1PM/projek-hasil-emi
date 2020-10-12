@@ -70,7 +70,6 @@ $no_bbm = 1;
             <tr>
               <th>Tanggal pengajuan</th>
               <th>Tanggal pengisian</th>
-              <th>Jenis BBM</th>
               <th>Driver</th>
               <th>SPBU</th>
               <th>Kendaraan</th>
@@ -80,14 +79,13 @@ $no_bbm = 1;
           </thead>
           <tbody>
             <?php
-            foreach ($data_pengajuanbbm as $data) { ?>
+            foreach ($data as $dt) { ?>
               <tr>
-                <td><?= $data->tanggal_pengajuan ?></td>
-                <td><?= $data->tanggal_pengisian ?></td>
-                <td><?= $data->jenis_bbm ?></td>
-                <td><?= $data->nama_driver ?></td>
-                <td><?= $data->nama_spbu ?></td>
-                <td><?= $data->jenis_kendaraan ?></td>
+                <td><?= $dt->tanggal_pengajuan ?></td>
+                <td><?= $dt->tanggal_pengisian ?></td>
+                <td><?= $dt->nama_driver ?></td>
+                <td><?= $dt->nama_spbu ?></td>
+                <td><?= $dt->jenis_kendaraan ?></td>
                 <td>
                   <?php
                   if ($dt->id_status == 1) {
@@ -100,7 +98,7 @@ $no_bbm = 1;
                 </td>
                 <td>
 
-                  <a href="?emi=detail-pengajuanbbm&id_pengajuan_kupon_bbm=<?= $data->id_pengajuan_kupon_bbm; ?>&parameter=1&s=ada" class="btn btn-sm btn-info"><i class="fa fa-eye"></i> Detail</a>
+                  <a href="?emi=detail-pengajuanbbm&id_pengajuan_kupon_bbm=<?= $dt->id_pengajuan_kupon_bbm; ?>&parameter=1&s=ada" class="btn btn-sm btn-info"><i class="fa fa-eye"></i> Detail</a>
 
                 </td>
               </tr>

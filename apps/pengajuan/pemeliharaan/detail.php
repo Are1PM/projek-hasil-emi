@@ -1,6 +1,9 @@
 <div class="card">
   <div class="card-header">
-    <a href="?emi=tambah-pengajuanbbm" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> Tambah data</a>
+    <?php if (!isset($_GET['s'])) { ?>
+      <a href="?emi=tambah-pengajuanbbm" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> Tambah data</a>
+    <?php } ?>
+
   </div>
   <!-- /.card-header -->
   <div class="card-body">
@@ -36,7 +39,14 @@
         </tr>
         <tr>
           <td>Status</td>
-          <td><?= $data->id_status ?></td>
+          <td> <?php
+                if ($data->id_status == 1) {
+                  echo "<span class='badge badge-success'>Disetujui</span>";
+                } elseif ($data->id_status == 2) {
+                  echo "<span class='badge badge-danger'>Ditolak</span>";
+                }
+
+                ?></td>
         </tr>
         <tr>
           <td>Keterangan</td>

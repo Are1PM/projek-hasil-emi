@@ -522,4 +522,28 @@ class AntarMuka
 		$jumlah_isi_bbm = $this->pengajuan_kupon_bbm->getJumlahBbm();
 		require_once "template/info.php";
 	}
+
+	public function tampilkanDetailInfo()
+	{
+		$target = $_GET['target'];
+		$data = [];
+		$status = $_GET['status'];
+		switch ($target) {
+			case 'ldp':
+				$data = $this->pengajuan_ldp->getFilter($status);
+				break;
+			case 'bbm':
+				$data = $this->pengajuan_kupon_bbm->getFilter($status);
+				break;
+			case 'service':
+				$data = $this->pengajuan_servis->getFilter($status);
+				break;
+			default:
+				echo "gagal";
+				break;
+		}
+
+
+		require_once "template/detail-info.php";
+	}
 }

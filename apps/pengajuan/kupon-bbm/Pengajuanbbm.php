@@ -123,11 +123,11 @@ class Pengajuanbbm
         $prepare = $this->konek->execute()->prepare($sql);
         $proses = $prepare->execute();
 
-        if ($jarak_tempuh == 100) {
-            $voucher = 150000;
-        } else if ($jarak_tempuh == 200) {
-            $voucher = 300000;
-        }
+        // if ($jarak_tempuh == 100) {
+        //     $voucher = 150000;
+        // } else if ($jarak_tempuh == 200) {
+        //     $voucher = 300000;
+        // }
 
         if ($proses) {
             echo '<div id="myModal" class="modal fade" role="dialog">
@@ -264,6 +264,19 @@ class Pengajuanbbm
         $sql = "SELECT k.id_kendaraan, k.jenis_kendaraan,k.plat, COUNT(*) as jumlah_isi FROM pengajuan_kupon_bbm b, kendaraan k WHERE b.id_kendaraan=k.id_kendaraan AND b.id_status=1 GROUP BY k.id_kendaraan";
         $query = $this->konek->execute()->query($sql)->fetchAll(PDO::FETCH_OBJ);
 
+        return $query;
+    }
+
+    public function queryFilterPengajuanbbm($id_status)
+    {
+        $id_driver = isset($_SESSION['id_driver']) ? $_SESSION['id_driver'] : "";
+        if ($_SESSION['hak_akses'] == "unit_sla") {
+            $sql = "SELECT * FROM pengajuan_kupon_bbm p,spbu s, kendaraan k, driver d, jarak_tempuh j, jenis_bbm b where s.id_spbu=p.id_spbu AND k.id_kendaraan=p.id_kendaraan AND d.id_driver=p.id_driver AND j.id_jarak_tempuh=p.id_jarak_tempuh AND b.id_jenis_bbm=p.id_jenis_bbm AND p.id_status ='$id_status')";
+        } else {
+            $sql = "SELECT * FROM pengajuan_kupon_bbm p,spbu s, kendaraan k, driver d, jarak_tempuh j, jenis_bbm b where p.id_driver='$id_driver' AND s.id_spbu=p.id_spbu AND k.id_kendaraan=p.id_kendaraan AND d.id_driver=p.id_driver AND j.id_jarak_tempuh=p.id_jarak_tempuh AND b.id_jenis_bbm=p.id_jenis_bbm AND p.id_status='$id_status'";
+        }
+
+        $query = $this->konek->execute()->query($sql)->fetchAll(PDO::FETCH_OBJ);
         return $query;
     }
 

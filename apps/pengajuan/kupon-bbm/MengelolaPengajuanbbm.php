@@ -62,7 +62,10 @@ class MengelolaPengajuanbbm extends Pengajuanbbm
     
     return $this->queryJumlahIsiBensin();
   }
+  
+  function getFilter($id_status)
+  {
+    return $this->queryFilterPengajuanbbm($id_status);
+  }
       
 }
-
-?>

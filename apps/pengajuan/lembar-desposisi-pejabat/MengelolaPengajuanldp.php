@@ -61,4 +61,9 @@ class MengelolaPengajuanldp extends Pengajuanldp
   {
     return $this->queryCount();
   }
+
+  function getFilter($id_status)
+  {
+    return $this->queryFilterPengajuanldp($id_status);
+  }
 }

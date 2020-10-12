@@ -1,6 +1,8 @@
 <div class="card">
   <div class="card-header">
-    <a href="?emi=tambah-pengajuanbbm" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> Tambah data</a>
+    <?php if (!isset($_GET['s'])) { ?>
+      <a href="?emi=tambah-pengajuanbbm" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> Tambah data</a>
+    <?php } ?>
   </div>
   <!-- /.card-header -->
   <div class="card-body">
@@ -19,7 +21,7 @@
           <td><?= $data->jarak_tempuh ?></td>
         </tr>
         <tr>
-        <td><b>Jenis BBM</b></td>
+          <td><b>Jenis BBM</b></td>
           <td><?= $data->jenis_bbm ?></td>
         </tr>
         <tr>
@@ -37,13 +39,13 @@
         <tr>
           <td>Kendaraan</td>
           <td><?= $data->jenis_kendaraan ?></td>
-          </tr>
+        </tr>
         <tr>
           <td>status</td>
           <td><?= $data->status ?></td>
         </tr>
         <td>keterangan</td>
-          <td><?= $data->keterangan ?></td>
+        <td><?= $data->keterangan ?></td>
         </tr>
       </tbody>
     </table>

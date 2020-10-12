@@ -319,6 +319,19 @@ class Pengajuanldp
         return [$ldp, $bbm, $service];
     }
 
+    public function queryFilterPengajuanldp($id_status)
+    {
+        $nip = isset($_SESSION['nip']) ? $_SESSION['nip'] : "";
+        if ($_SESSION['hak_akses'] == "unit_sla") {
+            $sql = "SELECT * FROM pengajuan_ldp p,driver d,pegawai pg,kendaraan k where d.id_driver=p.id_driver AND pg.nip=p.nip AND k.id_kendaraan=p.id_kendaraan AND p.id_status='$id_status'";
+        } else {
+            $sql = "SELECT * FROM pengajuan_ldp p,driver d,pegawai pg,kendaraan k where p.nip='$nip' AND d.id_driver=p.id_driver AND pg.nip=p.nip AND k.id_kendaraan=p.id_kendaraan AND p.id_status='$id_status'";
+        }
+
+        $query = $this->konek->execute()->query($sql)->fetchAll(PDO::FETCH_OBJ);
+        return $query;
+    }
+
     function __destruct()
     {
     }
